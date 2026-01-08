@@ -1,0 +1,8 @@
+
+{
+  "name": "Sentinel AI - Deepfake Detection System",
+  "description": "A high-end forensic platform for authenticating digital media using advanced AI detection algorithms and artifact analysis.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
