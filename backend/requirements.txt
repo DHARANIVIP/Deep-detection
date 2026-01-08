@@ -1,8 +1,22 @@
-fastapi
-uvicorn
-python-multipart
-opencv-python-headless
-numpy
-scipy
-pillow
-tensorflow
+# Web Server
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+
+# Computer Vision & Image Processing
+opencv-python==4.8.1.78
+Pillow==10.1.0
+numpy==1.26.2
+
+# AI & Deep Learning
+transformers==4.35.2
+torch==2.1.1
+torchvision==0.16.1
+
+# Math & Forensics
+scipy==1.11.4
+matplotlib==3.8.2
+
+# Utilities
+fpdf==1.7.2
+python-dotenv==1.0.0
