@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detective AI - Deepfake Detection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Light theme backgrounds
+            'bg-primary': '#F8FAFC',
+            'bg-secondary': '#FFFFFF',
+            'bg-section': '#F1F5F9',
+            // Text colors
+            'text-primary': '#0F172A',
+            'text-secondary': '#475569',
+            'text-muted': '#94A3B8',
+            // Brand colors
+            'primary-blue': '#2563EB',
+            'secondary-blue': '#3B82F6',
+            'accent-cyan': '#06B6D4',
+            // Status colors
+            'status-real': '#16A34A',
+            'status-fake': '#DC2626',
+            'status-warning': '#F59E0B',
+            'status-info': '#0284C7',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .glass-heavy {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(15, 23, 42, 0.12);
+    }
+
+    .grid-bg {
+      background-image: radial-gradient(circle at 2px 2px, rgba(37, 99, 235, 0.08) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+
+    .glow-blue {
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F8FAFC;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2563EB;
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "framer-motion": "https://esm.sh/framer-motion@^12.24.7",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
