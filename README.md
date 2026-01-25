@@ -50,17 +50,41 @@ HF_TOKEN=your_huggingface_token
 npm run build
 ```
 
+
 ### 4. Run the Application
 
 ```bash
 # Windows
-.\\run_app.bat
+.\run_app.bat
 
 # Linux/Mac
 python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 The application will be available at http://localhost:8000
+
+## 🚀 Deployment & Public Access
+
+This project is configured as a unified application where FastAPI serves the React frontend.
+
+### Option 1: Run Locally (Production Mode)
+
+1. **Build the Frontend:**
+   ```bash
+   npm install
+   npm run build
+   ```
+   This creates a `dist/` folder with the optimized React app.
+
+2. **Configure Environment:** Ensure your `backend/.env` file is set up with `MONGO_URI` and `HF_TOKEN`.
+
+3. **Start the Server:**
+   ```bash
+   python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
+   ```
+   Visit http://localhost:8000.
+
+
 
 ## Project Structure
 

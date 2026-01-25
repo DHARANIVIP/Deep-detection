@@ -20,7 +20,7 @@ const DashboardPage: React.FC = () => {
 
   const fetchScans = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/scans');
+      const response = await fetch('/api/scans');
       if (response.ok) {
         const data = await response.json();
         // Map backend data to frontend type if necessary, or ensure backend sends compatible shape
@@ -54,20 +54,22 @@ const DashboardPage: React.FC = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('http://localhost:8000/api/analyze', {
+      const response = await fetch('/api/analyze', {
         method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error('Upload failed');
+        const errorData = await response.json().catch(() => ({ detail: 'Upload failed' }));
+        throw new Error(errorData.detail || 'Upload failed');
       }
 
       const data = await response.json();
       navigate(`/analysis/${data.scan_id}`);
     } catch (error) {
       console.error("Error uploading file:", error);
-      alert("Failed to upload video. Please try again.");
+      const errorMessage = error instanceof Error ? error.message : "Failed to upload video. Please try again.";
+      alert(errorMessage);
     }
   };
 

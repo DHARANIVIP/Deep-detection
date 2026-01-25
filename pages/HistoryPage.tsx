@@ -13,7 +13,7 @@ const HistoryPage: React.FC = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/scans');
+        const response = await fetch('/api/scans');
         if (response.ok) {
           const data = await response.json();
 

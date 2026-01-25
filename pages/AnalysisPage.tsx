@@ -42,7 +42,7 @@ const AnalysisPage: React.FC = () => {
     // Poll for results
     const pollStatus = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/results/${id}`);
+        const response = await fetch(`/api/results/${id}`);
         if (response.ok) {
           const data = await response.json();
           if (data.status === 'PROCESSING') {
@@ -234,7 +234,7 @@ const AnalysisPage: React.FC = () => {
                 ref={videoRef}
                 onTimeUpdate={handleTimeUpdate}
                 className="w-full aspect-video object-cover bg-black"
-                src={`http://localhost:8000/api/video/${report.scan_id}`}
+                src={`/api/video/${report.scan_id}`}
                 controls
                 onError={(e) => {
                   const target = e.target as HTMLVideoElement;
@@ -243,7 +243,7 @@ const AnalysisPage: React.FC = () => {
               />
             ) : (
               <img
-                src={`http://localhost:8000/api/video/${report.scan_id}`}
+                src={`/api/video/${report.scan_id}`}
                 alt="Analyzed Image"
                 className="w-full h-full object-contain bg-black max-h-[500px]"
               />
@@ -266,12 +266,12 @@ const AnalysisPage: React.FC = () => {
                     }
                   }}
                   className="w-full h-full object-cover opacity-60 grayscale"
-                  src={`http://localhost:8000/api/video/${report.scan_id}`}
+                  src={`/api/video/${report.scan_id}`}
                   autoPlay={false} muted loop={false}
                 />
               ) : (
                 <img
-                  src={`http://localhost:8000/api/video/${report.scan_id}`}
+                  src={`/api/video/${report.scan_id}`}
                   alt="Analyzed Image Overlay"
                   className="w-full h-full object-contain opacity-60 grayscale"
                 />
