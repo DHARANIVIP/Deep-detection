@@ -9,19 +9,8 @@ echo "=================================="
 echo "🚀 Deep-detection Build Process"
 echo "=================================="
 
-# Install system dependencies for OpenCV
-echo ""
-echo "📦 Installing system dependencies..."
-apt-get update -qq
-apt-get install -y --no-install-recommends \
-    libgl1 \
-    libglib2.0-0 \
-    libgomp1 \
-    libsm6 \
-    libxext6 \
-    libxrender-dev \
-    libfontconfig1 \
-    || echo "⚠️  Warning: Some system packages may not be available"
+# Note: System dependencies are pre-installed in Render's environment
+# Using opencv-python-headless which doesn't require GUI libraries
 
 # Install Node.js dependencies
 echo ""
