@@ -4,6 +4,7 @@ import Navbar from '../Component/Navbar';
 import { motion } from 'framer-motion';
 import { Search, ExternalLink, Calendar, FileText } from 'lucide-react';
 import { ScanResult } from '../types';
+import { apiUrl } from '../utils/api';
 
 const HistoryPage: React.FC = () => {
   const [scans, setScans] = useState<ScanResult[]>([]);
@@ -13,7 +14,7 @@ const HistoryPage: React.FC = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch('/api/scans');
+        const response = await fetch(apiUrl('/api/scans'));
         if (response.ok) {
           const data = await response.json();
 

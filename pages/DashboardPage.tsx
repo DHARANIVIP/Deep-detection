@@ -6,6 +6,7 @@ import VideoUploader from '../Component/VideoUploader';
 import { ScanResult } from '../types';
 import { ExternalLink, Search, Filter, MoreHorizontal, Video, Image as ImageIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { apiUrl } from '../utils/api';
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const DashboardPage: React.FC = () => {
 
   const fetchScans = async () => {
     try {
-      const response = await fetch('/api/scans');
+      const response = await fetch(apiUrl('/api/scans'));
       if (response.ok) {
         const data = await response.json();
         // Map backend data to frontend type if necessary, or ensure backend sends compatible shape
@@ -54,7 +55,7 @@ const DashboardPage: React.FC = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('/api/analyze', {
+      const response = await fetch(apiUrl('/api/analyze'), {
         method: 'POST',
         body: formData,
       });

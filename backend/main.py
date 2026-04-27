@@ -19,7 +19,13 @@ app = FastAPI(title="Nexora Deepfake Defense API", version="2.0")
 # CORS (Allow Frontend to connect)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "https://deepfake-detection-git-main-dharanivips-projects.vercel.app", # From image URL
+        "https://*.vercel.app",
+        "*"
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )

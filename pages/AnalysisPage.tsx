@@ -5,6 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsToolti
 import Navbar from '../Component/Navbar';
 import { motion } from 'framer-motion';
 import { generateReportHTML, downloadReport, captureVideoScreenshot } from '../utils/reportGenerator';
+import { apiUrl } from '../utils/api';
 
 interface FrameData {
   timestamp: number;
@@ -43,7 +44,7 @@ const AnalysisPage: React.FC = () => {
     // Poll for results
     const pollStatus = async () => {
       try {
-        const response = await fetch(`/api/results/${id}`);
+        const response = await fetch(apiUrl(`/api/results/${id}`));
         if (response.ok) {
           const data = await response.json();
           if (data.status === 'PROCESSING') {
@@ -243,13 +244,13 @@ const AnalysisPage: React.FC = () => {
                 ref={videoRef}
                 onTimeUpdate={handleTimeUpdate}
                 className="w-full aspect-video object-cover bg-black"
-                src={`/api/video/${report.scan_id}`}
+                src={apiUrl(`/api/video/${report.scan_id}`)}
                 controls
                 onError={() => setMediaError(true)}
               />
             ) : (
               <img
-                src={`/api/video/${report.scan_id}`}
+                src={apiUrl(`/api/video/${report.scan_id}`)}
                 alt="Analyzed Image"
                 className="w-full h-full object-contain bg-black max-h-[500px]"
                 onError={() => setMediaError(true)}
@@ -277,12 +278,12 @@ const AnalysisPage: React.FC = () => {
                     }
                   }}
                   className="w-full h-full object-cover opacity-60 grayscale"
-                  src={`/api/video/${report.scan_id}`}
+                  src={apiUrl(`/api/video/${report.scan_id}`)}
                   autoPlay={false} muted loop={false}
                 />
               ) : (
                 <img
-                  src={`/api/video/${report.scan_id}`}
+                  src={apiUrl(`/api/video/${report.scan_id}`)}
                   alt="Analyzed Image Overlay"
                   className="w-full h-full object-contain opacity-60 grayscale"
                   onError={() => setMediaError(true)}
