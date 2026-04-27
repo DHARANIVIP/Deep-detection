@@ -13,16 +13,17 @@ except Exception:
 
 try:
     from huggingface_hub import InferenceClient
-    from transformers import pipeline
-    from PIL import Image
-    import numpy as np
-    import cv2
 except ImportError:
     InferenceClient = None
+
+try:
+    from transformers import pipeline
+except ImportError:
     pipeline = None
-    Image = None
-    np = None
-    cv2 = None
+
+from PIL import Image
+import numpy as np
+import cv2
 
 # --- 1. DEEP LEARNING ENGINE ---
 # Using HuggingFace Deep-Fake-Detector-v2-Model
