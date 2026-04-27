@@ -245,6 +245,7 @@ const AnalysisPage: React.FC = () => {
                 onTimeUpdate={handleTimeUpdate}
                 className="w-full aspect-video object-cover bg-black"
                 src={apiUrl(`/api/video/${report.scan_id}`)}
+                crossOrigin="anonymous"
                 controls
                 onError={() => setMediaError(true)}
               />
@@ -252,6 +253,7 @@ const AnalysisPage: React.FC = () => {
               <img
                 src={apiUrl(`/api/video/${report.scan_id}`)}
                 alt="Analyzed Image"
+                crossOrigin="anonymous"
                 className="w-full h-full object-contain bg-black max-h-[500px]"
                 onError={() => setMediaError(true)}
               />
@@ -279,12 +281,14 @@ const AnalysisPage: React.FC = () => {
                   }}
                   className="w-full h-full object-cover opacity-60 grayscale"
                   src={apiUrl(`/api/video/${report.scan_id}`)}
+                  crossOrigin="anonymous"
                   autoPlay={false} muted loop={false}
                 />
               ) : (
                 <img
                   src={apiUrl(`/api/video/${report.scan_id}`)}
                   alt="Analyzed Image Overlay"
+                  crossOrigin="anonymous"
                   className="w-full h-full object-contain opacity-60 grayscale"
                   onError={() => setMediaError(true)}
                 />
