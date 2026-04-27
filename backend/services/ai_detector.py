@@ -1,6 +1,15 @@
 import os
 import random
+from pathlib import Path
 from loguru import logger
+
+# Load .env so HF_TOKEN is available (must be before reading os.environ)
+try:
+    from dotenv import load_dotenv
+    _env_path = Path(__file__).resolve().parent.parent / ".env"
+    load_dotenv(_env_path)
+except Exception:
+    pass
 
 try:
     from huggingface_hub import InferenceClient

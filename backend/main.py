@@ -143,7 +143,28 @@ async def get_media(scan_id: str):
         return FileResponse(str(file_path), media_type=media_type)
         
     logger.error(f"Media not found for scan_id: {scan_id}")
-    raise HTTPException(status_code=404, detail="Media not found")
+    raise HTTPException(status_code=404, detail="Media file not found on disk. It may have been from a previous session.")
+
+@app.get("/api/scan-files/{scan_id}")
+async def get_scan_files(scan_id: str):
+    """Check which files exist on disk for a given scan"""
+    from backend.services.storage_manager import storage_manager
+    scan_folder = storage_manager.get_scan_paths(scan_id)["scan_folder"]
+    
+    has_media = storage_manager.get_video_path(scan_id) is not None
+    
+    thumbnails = []
+    thumbnail_dir = scan_folder / "thumbnails"
+    if thumbnail_dir.exists():
+        thumbnails = [f.name for f in sorted(thumbnail_dir.iterdir()) if f.suffix in [".jpg", ".jpeg", ".png"]]
+    
+    return {
+        "scan_id": scan_id,
+        "has_media": has_media,
+        "has_thumbnails": len(thumbnails) > 0,
+        "thumbnails": thumbnails,
+        "scan_folder_exists": scan_folder.exists()
+    }
 
 # --- SPA Catch-All ---
 

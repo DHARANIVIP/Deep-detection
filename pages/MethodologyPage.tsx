@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../Component/Navbar';
 import { motion } from 'framer-motion';
 import { Cpu, Zap, Activity, Scan, Layers, Fingerprint } from 'lucide-react';
 

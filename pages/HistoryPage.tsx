@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../Component/Navbar';
 import { motion } from 'framer-motion';
 import { Search, ExternalLink, Calendar, FileText } from 'lucide-react';
 import { ScanResult } from '../types';

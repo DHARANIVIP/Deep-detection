@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../Component/Navbar';
 import { motion } from 'framer-motion';
 import { Save, Bell, Shield, Eye, Database } from 'lucide-react';
 

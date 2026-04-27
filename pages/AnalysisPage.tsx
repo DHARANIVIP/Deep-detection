@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Download, Share2, Shield, AlertTriangle, CheckCircle, Info, Activity, Printer, Lock, ChevronLeft, Play, Pause, Maximize } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
-import Navbar from '../components/Navbar';
+import Navbar from '../Component/Navbar';
 import { motion } from 'framer-motion';
 import { generateReportHTML, downloadReport, captureVideoScreenshot } from '../utils/reportGenerator';
 
@@ -33,6 +33,7 @@ const AnalysisPage: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [currentFrame, setCurrentFrame] = useState(0);
   const [generatingReport, setGeneratingReport] = useState(false);
+  const [mediaError, setMediaError] = useState(false);
 
   // UI Toggles
   const [showLandmarks, setShowLandmarks] = useState(true);
@@ -229,23 +230,29 @@ const AnalysisPage: React.FC = () => {
               <Activity className="w-3 h-3 mr-1.5" /> Source Material
             </div>
 
-            {isVideo ? (
+            {mediaError ? (
+              <div className="w-full aspect-video bg-slate-900 flex flex-col items-center justify-center text-slate-400">
+                <svg className="w-16 h-16 mb-3 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M4 6h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" />
+                </svg>
+                <p className="text-sm font-semibold">Media Not Available</p>
+                <p className="text-xs mt-1 opacity-60">Source file was removed or not found on server</p>
+              </div>
+            ) : isVideo ? (
               <video
                 ref={videoRef}
                 onTimeUpdate={handleTimeUpdate}
                 className="w-full aspect-video object-cover bg-black"
                 src={`/api/video/${report.scan_id}`}
                 controls
-                onError={(e) => {
-                  const target = e.target as HTMLVideoElement;
-                  console.log("Video load error", e);
-                }}
+                onError={() => setMediaError(true)}
               />
             ) : (
               <img
                 src={`/api/video/${report.scan_id}`}
                 alt="Analyzed Image"
                 className="w-full h-full object-contain bg-black max-h-[500px]"
+                onError={() => setMediaError(true)}
               />
             )}
           </div>
@@ -258,7 +265,11 @@ const AnalysisPage: React.FC = () => {
 
             {/* Simulated Analysis View (Grayscale + Overlays) */}
             <div className="w-full aspect-video relative overflow-hidden flex items-center justify-center bg-black">
-              {isVideo ? (
+              {mediaError ? (
+                <div className="w-full h-full flex items-center justify-center text-slate-600">
+                  <p className="text-xs opacity-40 uppercase tracking-widest">No Overlay Available</p>
+                </div>
+              ) : isVideo ? (
                 <video
                   ref={(ref) => {
                     if (ref && videoRef.current) {
@@ -274,6 +285,7 @@ const AnalysisPage: React.FC = () => {
                   src={`/api/video/${report.scan_id}`}
                   alt="Analyzed Image Overlay"
                   className="w-full h-full object-contain opacity-60 grayscale"
+                  onError={() => setMediaError(true)}
                 />
               )}
 

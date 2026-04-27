@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import VideoUploader from '../components/VideoUploader';
+import Navbar from '../Component/Navbar';
+import VideoUploader from '../Component/VideoUploader';
 import { ScanResult } from '../types';
 import { ExternalLink, Search, Filter, MoreHorizontal, Video, Image as ImageIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
