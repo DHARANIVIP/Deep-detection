@@ -1,3 +1,5 @@
+import { apiUrl } from './api';
+
 /**
  * Report Generator Utility
  * Generates comprehensive HTML reports with video screenshots and forensic analysis data
@@ -55,7 +57,7 @@ export async function generateReportHTML(report: ScanReport, pageScreenshot?: st
     .filter(f => f.thumbnail)
     .map(async (frame, i) => {
       try {
-        const imageUrl = `http://localhost:8000/scans/${report.scan_id}/thumbnails/${frame.thumbnail}`;
+        const imageUrl = apiUrl(`/scans/${report.scan_id}/thumbnails/${frame.thumbnail}`);
         const response = await fetch(imageUrl);
         const blob = await response.blob();
         return new Promise<string>((resolve) => {
@@ -79,7 +81,7 @@ export async function generateReportHTML(report: ScanReport, pageScreenshot?: st
         // Fallback to URL if fetch fails
         return `
           <div class="thumbnail-item${i === 0 ? ' featured' : ''}">
-             <img src="http://localhost:8000/scans/${report.scan_id}/thumbnails/${frame.thumbnail}" alt="Frame ${i}" />
+             <img src="${apiUrl(`/scans/${report.scan_id}/thumbnails/${frame.thumbnail}`)}" alt="Frame ${i}" crossorigin="anonymous" />
              <div class="thumbnail-info">
                <span>Time: ${frame.timestamp.toFixed(2)}s</span>
                <span>AI: ${(frame.ai_probability * 100).toFixed(1)}%</span>
